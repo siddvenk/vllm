@@ -56,6 +56,9 @@ ENV VLLM_FA_CMAKE_GPU_ARCHES=${vllm_fa_cmake_gpu_arches}
 #################### WHEEL BUILD IMAGE ####################
 FROM base AS build
 
+# Set specific version to avoid auto version from setuptools_scm
+ENV SETUPTOOLS_SCM_PRETEND_VERSION=0.6.2
+
 # install build dependencies
 COPY requirements-build.txt requirements-build.txt
 
