@@ -101,7 +101,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
         && export SCCACHE_IDLE_TIMEOUT=0 \
         && export CMAKE_BUILD_TYPE=Release \
         && sccache --show-stats \
-        && python3 setup.py bdist_wheel --dist-dir=dist --py-limited-api=cp38 \
+        && python3 setup.py bdist_wheel --dist-dir=dist \
         && sccache --show-stats; \
     fi
 
@@ -110,7 +110,7 @@ RUN --mount=type=cache,target=/root/.cache/ccache \
     --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=.git,target=.git  \
     if [ "$USE_SCCACHE" != "1" ]; then \
-        python3 setup.py bdist_wheel --dist-dir=dist --py-limited-api=cp38; \
+        python3 setup.py bdist_wheel --dist-dir=dist; \
     fi
 
 # Check the size of the wheel if RUN_WHEEL_CHECK is true
